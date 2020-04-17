@@ -8,7 +8,7 @@ const app = express();
 //set static path
 app.use(express.static(path.join(__dirname, "client")));
 
-app.use(bodyparser.json);
+app.use(bodyparser.json());
 
 const publicVapidKey =
   "BPhOKk6oJEuTlPMXXgXDroD5oUfK7a9sC9FFKzuD5EUpZNysXxEZPJOXpR_mIugxAnalCeGMEbx0wMb_cswo3dY";
@@ -22,16 +22,16 @@ webpush.setVapidDetails(
 
 //subscribe route
 app.post("/subscribe", (req, res) => {
+  console.log("inside server post method");
   const subscription = req.body;
 
-  console.log('inside server post method');
+  console.log(subscription);
 
-  
   //send 201
   res.status(201).json({});
 
   //create payload
-  const payload = JSON.stringify({ title: "Push Title" });
+  const payload = JSON.stringify({ title: "Main Title in Notify" });
 
   //pass object into send notification functions
   webpush.sendNotification(subscription, payload).catch((err) => {
@@ -41,4 +41,4 @@ app.post("/subscribe", (req, res) => {
 
 const port = 5000;
 
-app.listen(port, () => console.log(`server start on  port ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));

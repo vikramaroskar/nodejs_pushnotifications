@@ -3,6 +3,7 @@ const publicVapidKey =
 
 //check service worker
 if ("serviceWorker" in navigator) {
+  console.log("Service worker detected in navigator");
   send().catch((err) => console.error(err));
 }
 
@@ -17,7 +18,7 @@ async function send() {
     scope: "/",
   });
 
-  console.log( "Service worker registered");
+  console.log("Service worker registered");
 
   //register push
   console.log("Registering push...");
